@@ -1,15 +1,15 @@
 # Copyright (C) 2024 WPClever
-# This file is distributed under the same license as the WPC Product Size Chart for WooCommerce plugin.
+# This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: WPC Product Size Chart for WooCommerce 2.2.0\n"
+"Project-Id-Version: WPC Product Size Chart for WooCommerce 2.2.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wpc-product-size-chart\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-08-18T22:53:29+00:00\n"
+"POT-Creation-Date: 2024-11-14T03:15:17+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.5.0\n"
 "X-Domain: wpc-product-size-chart\n"
@@ -34,338 +34,338 @@ msgstr ""
 msgid "https://wpclever.net"
 msgstr ""
 
-#: wpc-product-size-chart.php:139
+#: wpc-product-size-chart.php:141
 msgctxt "Post Type General Name"
 msgid "Size Charts"
 msgstr ""
 
-#: wpc-product-size-chart.php:140
+#: wpc-product-size-chart.php:142
 msgctxt "Post Type Singular Name"
 msgid "Size Chart"
 msgstr ""
 
-#: wpc-product-size-chart.php:141
+#: wpc-product-size-chart.php:143
 msgid "Add New Size Chart"
 msgstr ""
 
-#: wpc-product-size-chart.php:142
+#: wpc-product-size-chart.php:144
 msgid "Add New"
 msgstr ""
 
-#: wpc-product-size-chart.php:143
+#: wpc-product-size-chart.php:145
 msgid "Edit Size Chart"
 msgstr ""
 
-#: wpc-product-size-chart.php:144
+#: wpc-product-size-chart.php:146
 msgid "Update Size Chart"
 msgstr ""
 
-#: wpc-product-size-chart.php:145
+#: wpc-product-size-chart.php:147
 msgid "Search Size Chart"
 msgstr ""
 
-#: wpc-product-size-chart.php:149
+#: wpc-product-size-chart.php:151
 msgid "Size Chart"
 msgstr ""
 
-#: wpc-product-size-chart.php:177
+#: wpc-product-size-chart.php:179
 msgid "Configuration"
 msgstr ""
 
-#: wpc-product-size-chart.php:181
-#: wpc-product-size-chart.php:453
+#: wpc-product-size-chart.php:183
+#: wpc-product-size-chart.php:455
 msgid "Shortcode"
 msgstr ""
 
-#: wpc-product-size-chart.php:200
+#: wpc-product-size-chart.php:202
 msgid "Apply"
 msgstr ""
 
-#: wpc-product-size-chart.php:204
+#: wpc-product-size-chart.php:206
 msgid "Select which products you want to add this Size Charts automatically. If \"None\" is set, you can still manually choose to add this in the \"Size Charts\" tab of each individual product page."
 msgstr ""
 
-#: wpc-product-size-chart.php:206
+#: wpc-product-size-chart.php:208
 msgid "None"
 msgstr ""
 
-#: wpc-product-size-chart.php:207
+#: wpc-product-size-chart.php:209
 msgid "All products"
 msgstr ""
 
-#: wpc-product-size-chart.php:208
+#: wpc-product-size-chart.php:210
 msgid "Combined (Premium)"
 msgstr ""
 
-#: wpc-product-size-chart.php:223
+#: wpc-product-size-chart.php:225
 msgid "Configure to find products that match all listed conditions."
 msgstr ""
 
-#: wpc-product-size-chart.php:233
+#: wpc-product-size-chart.php:235
 msgid "+ Add condition"
 msgstr ""
 
-#: wpc-product-size-chart.php:260
+#: wpc-product-size-chart.php:262
 msgid "Above Text"
 msgstr ""
 
-#: wpc-product-size-chart.php:271
+#: wpc-product-size-chart.php:273
 msgid "Chart Table"
 msgstr ""
 
-#: wpc-product-size-chart.php:321
+#: wpc-product-size-chart.php:323
 msgid "Under Text"
 msgstr ""
 
-#: wpc-product-size-chart.php:365
+#: wpc-product-size-chart.php:367
 msgid "including"
 msgstr ""
 
-#: wpc-product-size-chart.php:366
+#: wpc-product-size-chart.php:368
 msgid "excluding"
 msgstr ""
 
-#: wpc-product-size-chart.php:414
+#: wpc-product-size-chart.php:416
 msgid "You can use below shortcode to place this size chart where you want."
 msgstr ""
 
-#: wpc-product-size-chart.php:451
+#: wpc-product-size-chart.php:453
 msgid "Title"
 msgstr ""
 
-#: wpc-product-size-chart.php:452
+#: wpc-product-size-chart.php:454
 msgid "Description"
 msgstr ""
 
-#: wpc-product-size-chart.php:454
+#: wpc-product-size-chart.php:456
 msgid "Date"
 msgstr ""
 
-#: wpc-product-size-chart.php:522
-#: wpc-product-size-chart.php:583
+#: wpc-product-size-chart.php:524
+#: wpc-product-size-chart.php:585
 msgid "How to use?"
 msgstr ""
 
-#: wpc-product-size-chart.php:523
-#: wpc-product-size-chart.php:586
+#: wpc-product-size-chart.php:525
+#: wpc-product-size-chart.php:588
 msgid "Settings"
 msgstr ""
 
-#: wpc-product-size-chart.php:524
-#: wpc-product-size-chart.php:592
+#: wpc-product-size-chart.php:526
+#: wpc-product-size-chart.php:594
 msgid "Premium Version"
 msgstr ""
 
-#: wpc-product-size-chart.php:540
+#: wpc-product-size-chart.php:542
 msgid "Community support"
 msgstr ""
 
-#: wpc-product-size-chart.php:555
-#: wpc-product-size-chart.php:565
+#: wpc-product-size-chart.php:557
+#: wpc-product-size-chart.php:567
 msgid "WPC Product Size Chart"
 msgstr ""
 
-#: wpc-product-size-chart.php:555
+#: wpc-product-size-chart.php:557
 msgid "Product Size Chart"
 msgstr ""
 
-#: wpc-product-size-chart.php:565
+#: wpc-product-size-chart.php:567
 msgid "Premium"
 msgstr ""
 
 #. translators: stars
-#: wpc-product-size-chart.php:568
+#: wpc-product-size-chart.php:570
 msgid "Thank you for using our plugin! If you are satisfied, please reward it a full five-star %s rating."
 msgstr ""
 
-#: wpc-product-size-chart.php:570
+#: wpc-product-size-chart.php:572
 msgid "Reviews"
 msgstr ""
 
-#: wpc-product-size-chart.php:571
+#: wpc-product-size-chart.php:573
 msgid "Changelog"
 msgstr ""
 
-#: wpc-product-size-chart.php:572
+#: wpc-product-size-chart.php:574
 msgid "Discussion"
 msgstr ""
 
-#: wpc-product-size-chart.php:577
+#: wpc-product-size-chart.php:579
 msgid "Settings updated."
 msgstr ""
 
-#: wpc-product-size-chart.php:589
+#: wpc-product-size-chart.php:591
 msgid "Global Size Charts"
 msgstr ""
 
-#: wpc-product-size-chart.php:595
+#: wpc-product-size-chart.php:597
 msgid "Essential Kit"
 msgstr ""
 
-#: wpc-product-size-chart.php:603
+#: wpc-product-size-chart.php:605
 msgid "1. Global Size Charts: Switch to Global Size Charts tab to add some size charts then you can use these size charts in each product."
 msgstr ""
 
-#: wpc-product-size-chart.php:606
+#: wpc-product-size-chart.php:608
 msgid "2. Product Basis Size Charts: When adding/editing the product you can choose the Size Charts tab then add some size charts as you want."
 msgstr ""
 
-#: wpc-product-size-chart.php:619
+#: wpc-product-size-chart.php:621
 msgid "General"
 msgstr ""
 
-#: wpc-product-size-chart.php:623
+#: wpc-product-size-chart.php:625
 msgid "Popup library"
 msgstr ""
 
-#: wpc-product-size-chart.php:626
+#: wpc-product-size-chart.php:628
 msgid "Featherlight"
 msgstr ""
 
-#: wpc-product-size-chart.php:627
+#: wpc-product-size-chart.php:629
 msgid "Magnific"
 msgstr ""
 
-#: wpc-product-size-chart.php:633
+#: wpc-product-size-chart.php:635
 msgid "Effect"
 msgstr ""
 
-#: wpc-product-size-chart.php:636
+#: wpc-product-size-chart.php:638
 msgid "Fade"
 msgstr ""
 
-#: wpc-product-size-chart.php:637
+#: wpc-product-size-chart.php:639
 msgid "Zoom in"
 msgstr ""
 
-#: wpc-product-size-chart.php:638
+#: wpc-product-size-chart.php:640
 msgid "Zoom out"
 msgstr ""
 
-#: wpc-product-size-chart.php:639
+#: wpc-product-size-chart.php:641
 msgid "Newspaper"
 msgstr ""
 
-#: wpc-product-size-chart.php:640
+#: wpc-product-size-chart.php:642
 msgid "Move horizontal"
 msgstr ""
 
-#: wpc-product-size-chart.php:641
+#: wpc-product-size-chart.php:643
 msgid "Move from top"
 msgstr ""
 
-#: wpc-product-size-chart.php:642
+#: wpc-product-size-chart.php:644
 msgid "3d unfold"
 msgstr ""
 
-#: wpc-product-size-chart.php:643
+#: wpc-product-size-chart.php:645
 msgid "Slide bottom"
 msgstr ""
 
-#: wpc-product-size-chart.php:645
+#: wpc-product-size-chart.php:647
 msgid "Effect for Magnific popup only."
 msgstr ""
 
-#: wpc-product-size-chart.php:649
+#: wpc-product-size-chart.php:651
 msgid "Position"
 msgstr ""
 
-#: wpc-product-size-chart.php:652
+#: wpc-product-size-chart.php:654
 msgid "Above the add to cart button"
 msgstr ""
 
-#: wpc-product-size-chart.php:653
+#: wpc-product-size-chart.php:655
 msgid "Under the add to cart button"
 msgstr ""
 
-#: wpc-product-size-chart.php:654
+#: wpc-product-size-chart.php:656
 msgid "Under the title"
 msgstr ""
 
-#: wpc-product-size-chart.php:655
+#: wpc-product-size-chart.php:657
 msgid "Under the price"
 msgstr ""
 
-#: wpc-product-size-chart.php:656
+#: wpc-product-size-chart.php:658
 msgid "Under the excerpt"
 msgstr ""
 
-#: wpc-product-size-chart.php:657
+#: wpc-product-size-chart.php:659
 msgid "Under the meta"
 msgstr ""
 
-#: wpc-product-size-chart.php:658
+#: wpc-product-size-chart.php:660
 msgid "Under the sharing"
 msgstr ""
 
-#: wpc-product-size-chart.php:659
+#: wpc-product-size-chart.php:661
 msgid "In a new tab"
 msgstr ""
 
-#: wpc-product-size-chart.php:660
+#: wpc-product-size-chart.php:662
 msgid "None (hide it)"
 msgstr ""
 
-#: wpc-product-size-chart.php:662
+#: wpc-product-size-chart.php:664
 msgid "Choose the position to show the size-chart links on single product page. You also can use the shortcode [wpcsc_link]."
 msgstr ""
 
-#: wpc-product-size-chart.php:666
+#: wpc-product-size-chart.php:668
 msgid "Combine"
 msgstr ""
 
-#: wpc-product-size-chart.php:669
+#: wpc-product-size-chart.php:671
 msgid "Yes"
 msgstr ""
 
-#: wpc-product-size-chart.php:670
+#: wpc-product-size-chart.php:672
 msgid "No"
 msgstr ""
 
-#: wpc-product-size-chart.php:672
+#: wpc-product-size-chart.php:674
 msgid "Combine and show all product size charts in one popup."
 msgstr ""
 
-#: wpc-product-size-chart.php:676
+#: wpc-product-size-chart.php:678
 msgid "Label"
 msgstr ""
 
-#: wpc-product-size-chart.php:679
-#: wpc-product-size-chart.php:846
-#: wpc-product-size-chart.php:941
-#: wpc-product-size-chart.php:1064
+#: wpc-product-size-chart.php:681
+#: wpc-product-size-chart.php:848
+#: wpc-product-size-chart.php:943
+#: wpc-product-size-chart.php:1066
 msgid "Size Charts"
 msgstr ""
 
-#: wpc-product-size-chart.php:684
+#: wpc-product-size-chart.php:686
 msgid "Cache"
 msgstr ""
 
-#: wpc-product-size-chart.php:688
+#: wpc-product-size-chart.php:690
 msgid "Cache the size charts to reduce the loading time."
 msgstr ""
 
-#: wpc-product-size-chart.php:1087
+#: wpc-product-size-chart.php:1089
 msgid "Product wasn't returned."
 msgstr ""
 
-#: wpc-product-size-chart.php:1098
+#: wpc-product-size-chart.php:1100
 msgid "Manage Global Size Charts"
 msgstr ""
 
 #. translators: shortcode
-#: wpc-product-size-chart.php:1101
+#: wpc-product-size-chart.php:1103
 msgid "You can use the shortcode %s to show this product's size charts."
 msgstr ""
 
-#: wpc-product-size-chart.php:1105
+#: wpc-product-size-chart.php:1107
 msgid "Global"
 msgstr ""
 
-#: wpc-product-size-chart.php:1107
+#: wpc-product-size-chart.php:1109
 msgid "Disable"
 msgstr ""
 
-#: wpc-product-size-chart.php:1109
+#: wpc-product-size-chart.php:1111
 msgid "Overwrite"
 msgstr ""

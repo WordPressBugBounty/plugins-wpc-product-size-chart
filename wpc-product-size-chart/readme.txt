@@ -3,9 +3,9 @@ Contributors: wpclever
 Donate link: https://wpclever.net
 Tags: woocommerce, wpc, size chart, size guide
 Requires at least: 4.0
-Tested up to: 6.6
-Version: 2.2.0
-Stable tag: 2.2.0
+Tested up to: 6.7
+Version: 2.2.1
+Stable tag: 2.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -97,6 +97,10 @@ Please try other plugins from us:
 
 == Changelog ==
 
+= 2.2.1 =
+* Fixed: Minor CSS/JS issues
+* Updated: Compatible with WP 6.7 & Woo 9.4
+
 = 2.2.0 =
 * Updated: Use WC_AJAX for frontend
 
@@ -108,17 +112,17 @@ Please try other plugins from us:
 
 = 2.1.2 =
 * Updated: Optimized the code
-* Fixed: Compatible with WP 6.5 & Woo 8.8
+* Updated: Compatible with WP 6.5 & Woo 8.8
 
 = 2.1.1 =
-* Fixed: Compatible with WP 6.4 & Woo 8.6
+* Updated: Compatible with WP 6.4 & Woo 8.6
 
 = 2.1.0 =
 * Updated: Optimized the code
 * Added: Combined source (Premium)
 
 = 2.0.7 =
-* Fixed: Compatible with WP 6.4 & Woo 8.4
+* Updated: Compatible with WP 6.4 & Woo 8.4
 
 = 2.0.6 =
 * Fixed: Minor CSS/JS issues in the backend
