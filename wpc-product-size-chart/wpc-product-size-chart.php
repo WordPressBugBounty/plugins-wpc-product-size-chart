@@ -3,7 +3,7 @@
 Plugin Name: WPC Product Size Chart for WooCommerce
 Plugin URI: https://wpclever.net/
 Description: Ultimate solution to manage WooCommerce product size charts.
-Version: 2.2.1
+Version: 2.2.2
 Author: WPClever
 Author URI: https://wpclever.net
 Text Domain: wpc-product-size-chart
@@ -12,14 +12,14 @@ Requires Plugins: woocommerce
 Requires at least: 4.0
 Tested up to: 6.7
 WC requires at least: 3.0
-WC tested up to: 9.4
+WC tested up to: 9.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
 
 defined( 'ABSPATH' ) || exit;
 
-! defined( 'WPCSC_VERSION' ) && define( 'WPCSC_VERSION', '2.2.1' );
+! defined( 'WPCSC_VERSION' ) && define( 'WPCSC_VERSION', '2.2.2' );
 ! defined( 'WPCSC_LITE' ) && define( 'WPCSC_LITE', __FILE__ );
 ! defined( 'WPCSC_FILE' ) && define( 'WPCSC_FILE', __FILE__ );
 ! defined( 'WPCSC_URI' ) && define( 'WPCSC_URI', plugin_dir_url( __FILE__ ) );
@@ -38,9 +38,6 @@ if ( ! function_exists( 'wpcsc_init' ) ) {
 	add_action( 'plugins_loaded', 'wpcsc_init', 11 );
 
 	function wpcsc_init() {
-		// load text-domain
-		load_plugin_textdomain( 'wpc-product-size-chart', false, basename( __DIR__ ) . '/languages/' );
-
 		if ( ! function_exists( 'WC' ) || ! version_compare( WC()->version, '3.0', '>=' ) ) {
 			add_action( 'admin_notices', 'wpcsc_notice_wc' );
 
@@ -137,6 +134,9 @@ if ( ! function_exists( 'wpcsc_init' ) ) {
 				}
 
 				function init() {
+					// load text-domain
+					load_plugin_textdomain( 'wpc-product-size-chart', false, basename( WPCSC_DIR ) . '/languages/' );
+
 					$labels = [
 						'name'          => _x( 'Size Charts', 'Post Type General Name', 'wpc-product-size-chart' ),
 						'singular_name' => _x( 'Size Chart', 'Post Type Singular Name', 'wpc-product-size-chart' ),
