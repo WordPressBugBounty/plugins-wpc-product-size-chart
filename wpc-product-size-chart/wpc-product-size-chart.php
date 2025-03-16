@@ -3,7 +3,7 @@
 Plugin Name: WPC Product Size Chart for WooCommerce
 Plugin URI: https://wpclever.net/
 Description: Ultimate solution to manage WooCommerce product size charts.
-Version: 2.2.2
+Version: 2.2.3
 Author: WPClever
 Author URI: https://wpclever.net
 Text Domain: wpc-product-size-chart
@@ -12,14 +12,14 @@ Requires Plugins: woocommerce
 Requires at least: 4.0
 Tested up to: 6.7
 WC requires at least: 3.0
-WC tested up to: 9.5
+WC tested up to: 9.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
 
 defined( 'ABSPATH' ) || exit;
 
-! defined( 'WPCSC_VERSION' ) && define( 'WPCSC_VERSION', '2.2.2' );
+! defined( 'WPCSC_VERSION' ) && define( 'WPCSC_VERSION', '2.2.3' );
 ! defined( 'WPCSC_LITE' ) && define( 'WPCSC_LITE', __FILE__ );
 ! defined( 'WPCSC_FILE' ) && define( 'WPCSC_FILE', __FILE__ );
 ! defined( 'WPCSC_URI' ) && define( 'WPCSC_URI', plugin_dir_url( __FILE__ ) );
@@ -219,8 +219,10 @@ if ( ! function_exists( 'wpcsc_init' ) ) {
                                 </div>
                                 <div class="wpcsc_type_row wpcsc_type_combined">
                                     <div class="wpcsc_combination">
-                                        <p class="description" style="color: #c9356e">This feature is only available on Premium Version. Click
-                                            <a href="https://wpclever.net/downloads/wpc-product-size-chart?utm_source=pro&utm_medium=wpcsc&utm_campaign=wporg" target="_blank">here</a> to buy, just $29!
+                                        <p class="description" style="color: #c9356e">This feature is only available on
+                                            Premium Version. Click
+                                            <a href="https://wpclever.net/downloads/wpc-product-size-chart?utm_source=pro&utm_medium=wpcsc&utm_campaign=wporg"
+                                               target="_blank">here</a> to buy, just $29!
                                         </p>
                                         <p class="description"><?php esc_html_e( 'Configure to find products that match all listed conditions.', 'wpc-product-size-chart' ); ?></p>
 										<?php
@@ -232,18 +234,21 @@ if ( ! function_exists( 'wpcsc_init' ) ) {
 										?>
                                     </div>
                                     <div class="wpcsc_add_combined">
-                                        <a class="wpcsc_new_combined" href="#"><?php esc_attr_e( '+ Add condition', 'wpc-product-size-chart' ); ?></a>
+                                        <a class="wpcsc_new_combined"
+                                           href="#"><?php esc_attr_e( '+ Add condition', 'wpc-product-size-chart' ); ?></a>
                                     </div>
                                 </div>
                                 <div class="wpcsc_type_row wpcsc_type_terms">
-                                    <input class="wpcsc_terms_val" name="wpcsc_terms" type="hidden" value="<?php echo esc_attr( $terms ); ?>"/>
+                                    <input class="wpcsc_terms_val" name="wpcsc_terms" type="hidden"
+                                           value="<?php echo esc_attr( $terms ); ?>"/>
 									<?php
 									if ( ! is_array( $terms ) ) {
 										$terms = array_map( 'trim', explode( ',', $terms ) );
 									}
 									?>
                                     <label>
-                                        <select class="wpcsc_terms_select" multiple="multiple" data-<?php echo esc_attr( $type ); ?>="<?php echo esc_attr( implode( ',', $terms ) ); ?>">
+                                        <select class="wpcsc_terms_select" multiple="multiple"
+                                                data-<?php echo esc_attr( $type ); ?>="<?php echo esc_attr( implode( ',', $terms ) ); ?>">
 											<?php
 											if ( ! empty( $terms ) ) {
 												foreach ( $terms as $t ) {
@@ -273,7 +278,8 @@ if ( ! function_exists( 'wpcsc_init' ) ) {
 								<?php esc_html_e( 'Chart Table', 'wpc-product-size-chart' ); ?>
                             </div>
                             <div class="wpcsc_configuration_td">
-                                <input id="wpcsc-table-val" type="hidden" name="wpcsc_table_data" value='<?php echo esc_attr( str_replace( '\'', '&apos;', $table_data ) ); ?>'>
+                                <input id="wpcsc-table-val" type="hidden" name="wpcsc_table_data"
+                                       value='<?php echo esc_attr( str_replace( '\'', '&apos;', $table_data ) ); ?>'>
                                 <div class="wpcsc-table-wrapper">
                                     <table id="wpcsc-table" class="wpcsc-table">
                                         <thead>
@@ -284,7 +290,11 @@ if ( ! function_exists( 'wpcsc_init' ) ) {
 												foreach ( $table_data_arr[0] as $col ) {
 													?>
                                                     <th class="wpcsc-btns">
-                                                        <input type="button" class="wpcsc-add-col wpcsc-add button-primary" value="+"/><input type="button" class="wpcsc-del-col wpcsc-del button" value="-"/>
+                                                        <input type="button"
+                                                               class="wpcsc-add-col wpcsc-add button-primary"
+                                                               value="+"/><input type="button"
+                                                                                 class="wpcsc-del-col wpcsc-del button"
+                                                                                 value="-"/>
                                                     </th>
 													<?php
 												}
@@ -299,12 +309,18 @@ if ( ! function_exists( 'wpcsc_init' ) ) {
 												?>
                                                 <tr>
                                                     <td class="wpcsc-btns">
-                                                        <input type="button" class="wpcsc-add-row wpcsc-add button-primary" value="+"/><input type="button" class="wpcsc-del-row wpcsc-del button" value="-"/>
+                                                        <input type="button"
+                                                               class="wpcsc-add-row wpcsc-add button-primary"
+                                                               value="+"/><input type="button"
+                                                                                 class="wpcsc-del-row wpcsc-del button"
+                                                                                 value="-"/>
                                                     </td>
 													<?php foreach ( $row as $val ) { ?>
                                                         <td>
                                                             <label>
-                                                                <input class="wpcsc-input-table" type="text" name="wpcsc_chart_input" value="<?php echo esc_attr( str_replace( '"', '&quot;', $val ) ); ?>"/>
+                                                                <input class="wpcsc-input-table" type="text"
+                                                                       name="wpcsc_chart_input"
+                                                                       value="<?php echo esc_attr( str_replace( '"', '&quot;', $val ) ); ?>"/>
                                                             </label>
                                                         </td>
 													<?php } ?>
@@ -369,7 +385,8 @@ if ( ! function_exists( 'wpcsc_init' ) ) {
 </select>
 </label></span> <span class="wpcsc_combined_val_wrap">
                                     <label>
-<select class="wpcsc_combined_val wpcsc_apply_terms" multiple="multiple" name="wpcsc_combined[<?php echo esc_attr( $combined_key ); ?>][terms][]">
+<select class="wpcsc_combined_val wpcsc_apply_terms" multiple="multiple"
+        name="wpcsc_combined[<?php echo esc_attr( $combined_key ); ?>][terms][]">
     <?php
     if ( ! empty( $terms ) ) {
 	    foreach ( $terms as $ct ) {
@@ -415,7 +432,8 @@ if ( ! function_exists( 'wpcsc_init' ) ) {
                     <div class="wpcsc-shortcode-wrap">
                         <p><?php esc_html_e( 'You can use below shortcode to place this size chart where you want.', 'wpc-product-size-chart' ); ?></p>
                         <label>
-                            <input type="text" onfocus="this.select();" readonly="readonly" class="code" value="[wpcsc id='<?php echo esc_attr( get_the_ID() ); ?>']"/>
+                            <input type="text" onfocus="this.select();" readonly="readonly" class="code"
+                                   value="[wpcsc id='<?php echo esc_attr( get_the_ID() ); ?>']"/>
                         </label>
                     </div>
 					<?php
@@ -466,7 +484,8 @@ if ( ! function_exists( 'wpcsc_init' ) ) {
 						?>
                         <div class="wpcsc-shortcode-wrap">
                             <label>
-                                <input type="text" onfocus="this.select();" readonly="readonly" value="[wpcsc id='<?php echo esc_attr( $post_id ); ?>']" class="code"/>
+                                <input type="text" onfocus="this.select();" readonly="readonly"
+                                       value="[wpcsc id='<?php echo esc_attr( $post_id ); ?>']" class="code"/>
                             </label>
                         </div>
 						<?php
@@ -569,9 +588,12 @@ if ( ! function_exists( 'wpcsc_init' ) ) {
                             <p>
 								<?php printf( /* translators: stars */ esc_html__( 'Thank you for using our plugin! If you are satisfied, please reward it a full five-star %s rating.', 'wpc-product-size-chart' ), '<span style="color:#ffb900">&#9733;&#9733;&#9733;&#9733;&#9733;</span>' ); ?>
                                 <br/>
-                                <a href="<?php echo esc_url( WPCSC_REVIEWS ); ?>" target="_blank"><?php esc_html_e( 'Reviews', 'wpc-product-size-chart' ); ?></a> |
-                                <a href="<?php echo esc_url( WPCSC_CHANGELOG ); ?>" target="_blank"><?php esc_html_e( 'Changelog', 'wpc-product-size-chart' ); ?></a> |
-                                <a href="<?php echo esc_url( WPCSC_DISCUSSION ); ?>" target="_blank"><?php esc_html_e( 'Discussion', 'wpc-product-size-chart' ); ?></a>
+                                <a href="<?php echo esc_url( WPCSC_REVIEWS ); ?>"
+                                   target="_blank"><?php esc_html_e( 'Reviews', 'wpc-product-size-chart' ); ?></a> |
+                                <a href="<?php echo esc_url( WPCSC_CHANGELOG ); ?>"
+                                   target="_blank"><?php esc_html_e( 'Changelog', 'wpc-product-size-chart' ); ?></a> |
+                                <a href="<?php echo esc_url( WPCSC_DISCUSSION ); ?>"
+                                   target="_blank"><?php esc_html_e( 'Discussion', 'wpc-product-size-chart' ); ?></a>
                             </p>
                         </div>
 						<?php if ( isset( $_GET['settings-updated'] ) && $_GET['settings-updated'] ) { ?>
@@ -581,19 +603,25 @@ if ( ! function_exists( 'wpcsc_init' ) ) {
 						<?php } ?>
                         <div class="wpclever_settings_page_nav">
                             <h2 class="nav-tab-wrapper">
-                                <a href="<?php echo esc_url( admin_url( 'admin.php?page=wpclever-wpcsc&tab=how' ) ); ?>" class="<?php echo esc_attr( $active_tab === 'how' ? 'nav-tab nav-tab-active' : 'nav-tab' ); ?>">
+                                <a href="<?php echo esc_url( admin_url( 'admin.php?page=wpclever-wpcsc&tab=how' ) ); ?>"
+                                   class="<?php echo esc_attr( $active_tab === 'how' ? 'nav-tab nav-tab-active' : 'nav-tab' ); ?>">
 									<?php esc_html_e( 'How to use?', 'wpc-product-size-chart' ); ?>
                                 </a>
-                                <a href="<?php echo esc_url( admin_url( 'admin.php?page=wpclever-wpcsc&tab=settings' ) ); ?>" class="<?php echo esc_attr( $active_tab === 'settings' ? 'nav-tab nav-tab-active' : 'nav-tab' ); ?>">
+                                <a href="<?php echo esc_url( admin_url( 'admin.php?page=wpclever-wpcsc&tab=settings' ) ); ?>"
+                                   class="<?php echo esc_attr( $active_tab === 'settings' ? 'nav-tab nav-tab-active' : 'nav-tab' ); ?>">
 									<?php esc_html_e( 'Settings', 'wpc-product-size-chart' ); ?>
                                 </a>
-                                <a href="<?php echo esc_url( admin_url( 'edit.php?post_type=wpc_size_chart' ) ); ?>" class="nav-tab">
+                                <a href="<?php echo esc_url( admin_url( 'edit.php?post_type=wpc_size_chart' ) ); ?>"
+                                   class="nav-tab">
 									<?php esc_html_e( 'Global Size Charts', 'wpc-product-size-chart' ); ?>
                                 </a>
-                                <a href="<?php echo esc_url( admin_url( 'admin.php?page=wpclever-wpcsc&tab=premium' ) ); ?>" class="<?php echo esc_attr( $active_tab === 'premium' ? 'nav-tab nav-tab-active' : 'nav-tab' ); ?>" style="color: #c9356e">
+                                <a href="<?php echo esc_url( admin_url( 'admin.php?page=wpclever-wpcsc&tab=premium' ) ); ?>"
+                                   class="<?php echo esc_attr( $active_tab === 'premium' ? 'nav-tab nav-tab-active' : 'nav-tab' ); ?>"
+                                   style="color: #c9356e">
 									<?php esc_html_e( 'Premium Version', 'wpc-product-size-chart' ); ?>
                                 </a>
-                                <a href="<?php echo esc_url( admin_url( 'admin.php?page=wpclever-kit' ) ); ?>" class="nav-tab">
+                                <a href="<?php echo esc_url( admin_url( 'admin.php?page=wpclever-kit' ) ); ?>"
+                                   class="nav-tab">
 									<?php esc_html_e( 'Essential Kit', 'wpc-product-size-chart' ); ?>
                                 </a>
                             </h2>
@@ -628,7 +656,11 @@ if ( ! function_exists( 'wpcsc_init' ) ) {
                                                         <option value="featherlight" <?php selected( $library, 'featherlight' ); ?>><?php esc_html_e( 'Featherlight', 'wpc-product-size-chart' ); ?></option>
                                                         <option value="magnific" <?php selected( $library, 'magnific' ); ?>><?php esc_html_e( 'Magnific', 'wpc-product-size-chart' ); ?></option>
                                                     </select> </label>
-                                                <span class="description">Read more about <a href="https://noelboss.github.io/featherlight/" target="_blank">Featherlight</a> and <a href="https://dimsemenov.com/plugins/magnific-popup/" target="_blank">Magnific</a>. Recommend using the popup library that is already used in the theme or other plugins on your site.</span>
+                                                <span class="description">Read more about <a
+                                                            href="https://noelboss.github.io/featherlight/"
+                                                            target="_blank">Featherlight</a> and <a
+                                                            href="https://dimsemenov.com/plugins/magnific-popup/"
+                                                            target="_blank">Magnific</a>. Recommend using the popup library that is already used in the theme or other plugins on your site.</span>
                                             </td>
                                         </tr>
                                         <tr class="wpcsc-show-if-magnific">
@@ -678,7 +710,9 @@ if ( ! function_exists( 'wpcsc_init' ) ) {
                                             <th><?php esc_html_e( 'Label', 'wpc-product-size-chart' ); ?></th>
                                             <td>
                                                 <label>
-                                                    <input type="text" class="regular-text" name="wpcsc_settings[label]" value="<?php echo esc_attr( self::get_setting( 'label' ) ); ?>" placeholder="<?php esc_html_e( 'Size Charts', 'wpc-product-size-chart' ); ?>"/>
+                                                    <input type="text" class="regular-text" name="wpcsc_settings[label]"
+                                                           value="<?php echo esc_attr( self::get_setting( 'label' ) ); ?>"
+                                                           placeholder="<?php esc_html_e( 'Size Charts', 'wpc-product-size-chart' ); ?>"/>
                                                 </label>
                                             </td>
                                         </tr>
@@ -686,7 +720,9 @@ if ( ! function_exists( 'wpcsc_init' ) ) {
                                             <th><?php esc_html_e( 'Cache', 'wpc-product-size-chart' ); ?></th>
                                             <td>
                                                 <label>
-                                                    <input type="number" min="0" step="1" name="wpcsc_settings[cache]" value="<?php echo esc_attr( self::get_setting( 'cache', 0 ) ); ?>" placeholder="0"/> hrs.
+                                                    <input type="number" min="0" step="1" name="wpcsc_settings[cache]"
+                                                           value="<?php echo esc_attr( self::get_setting( 'cache', 0 ) ); ?>"
+                                                           placeholder="0"/> hrs.
                                                     <span class="description"><?php esc_html_e( 'Cache the size charts to reduce the loading time.', 'wpc-product-size-chart' ); ?></span>
                                                 </label>
                                             </td>
@@ -701,7 +737,8 @@ if ( ! function_exists( 'wpcsc_init' ) ) {
 							<?php } elseif ( $active_tab === 'premium' ) { ?>
                                 <div class="wpclever_settings_page_content_text">
                                     <p>Get the Premium Version just $29!
-                                        <a href="https://wpclever.net/downloads/wpc-product-size-chart?utm_source=pro&utm_medium=wpcsc&utm_campaign=wporg" target="_blank">https://wpclever.net/downloads/wpc-product-size-chart</a>
+                                        <a href="https://wpclever.net/downloads/wpc-product-size-chart?utm_source=pro&utm_medium=wpcsc&utm_campaign=wporg"
+                                           target="_blank">https://wpclever.net/downloads/wpc-product-size-chart</a>
                                     </p>
                                     <p><strong>Extra features for Premium Version:</strong></p>
                                     <ul style="margin-bottom: 0">
@@ -717,13 +754,17 @@ if ( ! function_exists( 'wpcsc_init' ) ) {
                             </div>
                             <div class="wpclever_settings_page_suggestion_content">
                                 <div>
-                                    To display custom engaging real-time messages on any wished positions, please install
-                                    <a href="https://wordpress.org/plugins/wpc-smart-messages/" target="_blank">WPC Smart Messages</a> plugin. It's free!
+                                    To display custom engaging real-time messages on any wished positions, please
+                                    install
+                                    <a href="https://wordpress.org/plugins/wpc-smart-messages/" target="_blank">WPC
+                                        Smart Messages</a> plugin. It's free!
                                 </div>
                                 <div>
                                     Wanna save your precious time working on variations? Try our brand-new free plugin
-                                    <a href="https://wordpress.org/plugins/wpc-variation-bulk-editor/" target="_blank">WPC Variation Bulk Editor</a> and
-                                    <a href="https://wordpress.org/plugins/wpc-variation-duplicator/" target="_blank">WPC Variation Duplicator</a>.
+                                    <a href="https://wordpress.org/plugins/wpc-variation-bulk-editor/" target="_blank">WPC
+                                        Variation Bulk Editor</a> and
+                                    <a href="https://wordpress.org/plugins/wpc-variation-duplicator/" target="_blank">WPC
+                                        Variation Duplicator</a>.
                                 </div>
                             </div>
                         </div>
@@ -1097,18 +1138,22 @@ if ( ! function_exists( 'wpcsc_init' ) ) {
 					?>
                     <div id='wpcsc_settings' class='panel woocommerce_options_panel wpcsc_settings'>
                         <div class="wpcsc-global">
-                            <a href="<?php echo esc_url( admin_url( 'edit.php?post_type=wpc_size_chart' ) ); ?>" target="_blank"><?php esc_html_e( 'Manage Global Size Charts', 'wpc-product-size-chart' ); ?></a>
+                            <a href="<?php echo esc_url( admin_url( 'edit.php?post_type=wpc_size_chart' ) ); ?>"
+                               target="_blank"><?php esc_html_e( 'Manage Global Size Charts', 'wpc-product-size-chart' ); ?></a>
                         </div>
                         <div class="wpcsc-global">
 							<?php echo sprintf( /* translators: shortcode */ esc_html__( 'You can use the shortcode %s to show this product\'s size charts.', 'wpc-product-size-chart' ), '<strong>[wpcsc_product id="' . esc_attr( $product_id ) . '"]</strong>' ); ?>
                         </div>
                         <div class="wpcsc-active">
                             <label>
-                                <input name="wpcsc_active" type="radio" value="default" <?php echo esc_attr( $active === 'default' ? 'checked' : '' ); ?>/> <?php esc_html_e( 'Global', 'wpc-product-size-chart' ); ?>
+                                <input name="wpcsc_active" type="radio"
+                                       value="default" <?php echo esc_attr( $active === 'default' ? 'checked' : '' ); ?>/> <?php esc_html_e( 'Global', 'wpc-product-size-chart' ); ?>
                             </label> <label>
-                                <input name="wpcsc_active" type="radio" value="disable" <?php echo esc_attr( $active === 'disable' ? 'checked' : '' ); ?>/> <?php esc_html_e( 'Disable', 'wpc-product-size-chart' ); ?>
+                                <input name="wpcsc_active" type="radio"
+                                       value="disable" <?php echo esc_attr( $active === 'disable' ? 'checked' : '' ); ?>/> <?php esc_html_e( 'Disable', 'wpc-product-size-chart' ); ?>
                             </label> <label>
-                                <input name="wpcsc_active" type="radio" value="overwrite" <?php echo esc_attr( $active === 'overwrite' ? 'checked' : '' ); ?>/> <?php esc_html_e( 'Overwrite', 'wpc-product-size-chart' ); ?>
+                                <input name="wpcsc_active" type="radio"
+                                       value="overwrite" <?php echo esc_attr( $active === 'overwrite' ? 'checked' : '' ); ?>/> <?php esc_html_e( 'Overwrite', 'wpc-product-size-chart' ); ?>
                             </label>
                         </div>
                         <div class="wpcsc-overwrite">
@@ -1127,7 +1172,8 @@ if ( ! function_exists( 'wpcsc_init' ) ) {
 									}
 									?>
                                 </select> </label>
-                            <input type="hidden" name="wpcsc_size_charts" class="wpcsc-size-charts-val" value="<?php echo esc_attr( $saved_size_charts ); ?>"/>
+                            <input type="hidden" name="wpcsc_size_charts" class="wpcsc-size-charts-val"
+                                   value="<?php echo esc_attr( $saved_size_charts ); ?>"/>
                         </div>
                     </div>
 					<?php
