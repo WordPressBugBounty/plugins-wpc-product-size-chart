@@ -3,23 +3,23 @@
 Plugin Name: WPC Product Size Chart for WooCommerce
 Plugin URI: https://wpclever.net/
 Description: Ultimate solution to manage WooCommerce product size charts.
-Version: 2.2.3
+Version: 2.2.4
 Author: WPClever
 Author URI: https://wpclever.net
 Text Domain: wpc-product-size-chart
 Domain Path: /languages/
 Requires Plugins: woocommerce
 Requires at least: 4.0
-Tested up to: 6.7
+Tested up to: 6.8
 WC requires at least: 3.0
-WC tested up to: 9.7
+WC tested up to: 9.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
 
 defined( 'ABSPATH' ) || exit;
 
-! defined( 'WPCSC_VERSION' ) && define( 'WPCSC_VERSION', '2.2.3' );
+! defined( 'WPCSC_VERSION' ) && define( 'WPCSC_VERSION', '2.2.4' );
 ! defined( 'WPCSC_LITE' ) && define( 'WPCSC_LITE', __FILE__ );
 ! defined( 'WPCSC_FILE' ) && define( 'WPCSC_FILE', __FILE__ );
 ! defined( 'WPCSC_URI' ) && define( 'WPCSC_URI', plugin_dir_url( __FILE__ ) );
@@ -818,8 +818,10 @@ if ( ! function_exists( 'wpcsc_init' ) ) {
 				}
 
 				function ajax_get_chart() {
-					if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_key( $_POST['nonce'] ), 'wpcsc-security' ) ) {
-						die( 'Permissions check failed!' );
+					if ( ! apply_filters( 'wpcsc_disable_security_check', false, 'get_chart' ) ) {
+						if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_key( $_POST['nonce'] ), 'wpcsc-security' ) ) {
+							die( 'Permissions check failed!' );
+						}
 					}
 
 					echo self::size_chart( sanitize_text_field( $_POST['id'] ) );
@@ -828,8 +830,10 @@ if ( ! function_exists( 'wpcsc_init' ) ) {
 				}
 
 				function ajax_get_charts() {
-					if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_key( $_POST['nonce'] ), 'wpcsc-security' ) ) {
-						die( 'Permissions check failed!' );
+					if ( ! apply_filters( 'wpcsc_disable_security_check', false, 'get_charts' ) ) {
+						if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_key( $_POST['nonce'] ), 'wpcsc-security' ) ) {
+							die( 'Permissions check failed!' );
+						}
 					}
 
 					echo self::size_charts( sanitize_text_field( $_POST['id'] ) );
