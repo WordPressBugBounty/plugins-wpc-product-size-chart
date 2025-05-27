@@ -3,7 +3,7 @@
 Plugin Name: WPC Product Size Chart for WooCommerce
 Plugin URI: https://wpclever.net/
 Description: Ultimate solution to manage WooCommerce product size charts.
-Version: 2.2.4
+Version: 2.2.5
 Author: WPClever
 Author URI: https://wpclever.net
 Text Domain: wpc-product-size-chart
@@ -19,7 +19,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 defined( 'ABSPATH' ) || exit;
 
-! defined( 'WPCSC_VERSION' ) && define( 'WPCSC_VERSION', '2.2.4' );
+! defined( 'WPCSC_VERSION' ) && define( 'WPCSC_VERSION', '2.2.5' );
 ! defined( 'WPCSC_LITE' ) && define( 'WPCSC_LITE', __FILE__ );
 ! defined( 'WPCSC_FILE' ) && define( 'WPCSC_FILE', __FILE__ );
 ! defined( 'WPCSC_URI' ) && define( 'WPCSC_URI', plugin_dir_url( __FILE__ ) );
@@ -171,8 +171,8 @@ if ( ! function_exists( 'wpcsc_init' ) ) {
 
 					// shortcode
 					add_shortcode( 'wpcsc', [ $this, 'shortcode' ] );
-					add_shortcode( 'wpcsc_product', [ $this, 'shortcode_product' ] );
 					add_shortcode( 'wpcsc_link', [ $this, 'shortcode_link' ] );
+					add_shortcode( 'wpcsc_product', [ $this, 'shortcode_product' ] );
 				}
 
 				function add_meta_boxes() {
@@ -856,13 +856,23 @@ if ( ! function_exists( 'wpcsc_init' ) ) {
 					return apply_filters( 'wpcsc_shortcode', $output, $attrs['id'] );
 				}
 
+				function shortcode_link() {
+					ob_start();
+					self::size_charts_list();
+
+					return apply_filters( 'wpcsc_shortcode_link', ob_get_clean() );
+				}
+
 				function shortcode_product( $attrs ) {
 					$output = '';
 					$attrs  = shortcode_atts( [ 'id' => null ], $attrs, 'wpcsc_product' );
 
 					if ( ! $attrs['id'] ) {
 						global $product;
-						$attrs['id'] = $product->get_id();
+
+						if ( is_a( $product, 'WC_Product' ) ) {
+							$attrs['id'] = $product->get_id();
+						}
 					}
 
 					if ( $attrs['id'] ) {
@@ -870,13 +880,6 @@ if ( ! function_exists( 'wpcsc_init' ) ) {
 					}
 
 					return apply_filters( 'wpcsc_shortcode_product', $output, $attrs['id'] );
-				}
-
-				function shortcode_link() {
-					ob_start();
-					self::size_charts_list();
-
-					return apply_filters( 'wpcsc_shortcode_link', ob_get_clean() );
 				}
 
 				function product_tabs( $tabs ) {
