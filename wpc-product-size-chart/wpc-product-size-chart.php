@@ -3,7 +3,7 @@
 Plugin Name: WPC Product Size Chart for WooCommerce
 Plugin URI: https://wpclever.net/
 Description: Ultimate solution to manage WooCommerce product size charts.
-Version: 2.2.5
+Version: 2.2.6
 Author: WPClever
 Author URI: https://wpclever.net
 Text Domain: wpc-product-size-chart
@@ -12,14 +12,14 @@ Requires Plugins: woocommerce
 Requires at least: 4.0
 Tested up to: 6.8
 WC requires at least: 3.0
-WC tested up to: 9.8
+WC tested up to: 9.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
 
 defined( 'ABSPATH' ) || exit;
 
-! defined( 'WPCSC_VERSION' ) && define( 'WPCSC_VERSION', '2.2.5' );
+! defined( 'WPCSC_VERSION' ) && define( 'WPCSC_VERSION', '2.2.6' );
 ! defined( 'WPCSC_LITE' ) && define( 'WPCSC_LITE', __FILE__ );
 ! defined( 'WPCSC_FILE' ) && define( 'WPCSC_FILE', __FILE__ );
 ! defined( 'WPCSC_URI' ) && define( 'WPCSC_URI', plugin_dir_url( __FILE__ ) );
@@ -583,19 +583,28 @@ if ( ! function_exists( 'wpcsc_init' ) ) {
 					$active_tab = sanitize_key( $_GET['tab'] ?? 'settings' );
 					?>
                     <div class="wpclever_settings_page wrap">
-                        <h1 class="wpclever_settings_page_title"><?php echo esc_html__( 'WPC Product Size Chart', 'wpc-product-size-chart' ) . ' ' . esc_html( WPCSC_VERSION ) . ' ' . ( defined( 'WPCSC_PREMIUM' ) ? '<span class="premium" style="display: none">' . esc_html__( 'Premium', 'wpc-product-size-chart' ) . '</span>' : '' ); ?></h1>
-                        <div class="wpclever_settings_page_desc about-text">
-                            <p>
-								<?php printf( /* translators: stars */ esc_html__( 'Thank you for using our plugin! If you are satisfied, please reward it a full five-star %s rating.', 'wpc-product-size-chart' ), '<span style="color:#ffb900">&#9733;&#9733;&#9733;&#9733;&#9733;</span>' ); ?>
-                                <br/>
-                                <a href="<?php echo esc_url( WPCSC_REVIEWS ); ?>"
-                                   target="_blank"><?php esc_html_e( 'Reviews', 'wpc-product-size-chart' ); ?></a> |
-                                <a href="<?php echo esc_url( WPCSC_CHANGELOG ); ?>"
-                                   target="_blank"><?php esc_html_e( 'Changelog', 'wpc-product-size-chart' ); ?></a> |
-                                <a href="<?php echo esc_url( WPCSC_DISCUSSION ); ?>"
-                                   target="_blank"><?php esc_html_e( 'Discussion', 'wpc-product-size-chart' ); ?></a>
-                            </p>
+                        <div class="wpclever_settings_page_header">
+                            <a class="wpclever_settings_page_header_logo" href="https://wpclever.net/"
+                               target="_blank" title="Visit wpclever.net"></a>
+                            <div class="wpclever_settings_page_header_text">
+                                <div class="wpclever_settings_page_title"><?php echo esc_html__( 'WPC Product Size Chart', 'wpc-product-size-chart' ) . ' ' . esc_html( WPCSC_VERSION ) . ' ' . ( defined( 'WPCSC_PREMIUM' ) ? '<span class="premium" style="display: none">' . esc_html__( 'Premium', 'wpc-product-size-chart' ) . '</span>' : '' ); ?></div>
+                                <div class="wpclever_settings_page_desc about-text">
+                                    <p>
+										<?php printf( /* translators: stars */ esc_html__( 'Thank you for using our plugin! If you are satisfied, please reward it a full five-star %s rating.', 'wpc-product-size-chart' ), '<span style="color:#ffb900">&#9733;&#9733;&#9733;&#9733;&#9733;</span>' ); ?>
+                                        <br/>
+                                        <a href="<?php echo esc_url( WPCSC_REVIEWS ); ?>"
+                                           target="_blank"><?php esc_html_e( 'Reviews', 'wpc-product-size-chart' ); ?></a>
+                                        |
+                                        <a href="<?php echo esc_url( WPCSC_CHANGELOG ); ?>"
+                                           target="_blank"><?php esc_html_e( 'Changelog', 'wpc-product-size-chart' ); ?></a>
+                                        |
+                                        <a href="<?php echo esc_url( WPCSC_DISCUSSION ); ?>"
+                                           target="_blank"><?php esc_html_e( 'Discussion', 'wpc-product-size-chart' ); ?></a>
+                                    </p>
+                                </div>
+                            </div>
                         </div>
+                        <h2></h2>
 						<?php if ( isset( $_GET['settings-updated'] ) && $_GET['settings-updated'] ) { ?>
                             <div class="notice notice-success is-dismissible">
                                 <p><?php esc_html_e( 'Settings updated.', 'wpc-product-size-chart' ); ?></p>
