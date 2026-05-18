@@ -3,7 +3,7 @@
 Plugin Name: WPC Product Size Chart for WooCommerce
 Plugin URI: https://wpclever.net/
 Description: Ultimate solution to manage WooCommerce product size charts.
-Version: 2.3.0
+Version: 2.3.1
 Author: WPClever
 Author URI: https://wpclever.net
 Text Domain: wpc-product-size-chart
@@ -12,14 +12,14 @@ Requires Plugins: woocommerce
 Requires at least: 4.0
 Tested up to: 6.9
 WC requires at least: 3.0
-WC tested up to: 10.6
+WC tested up to: 10.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
 
 defined( 'ABSPATH' ) || exit;
 
-! defined( 'WPCSC_VERSION' ) && define( 'WPCSC_VERSION', '2.3.0' );
+! defined( 'WPCSC_VERSION' ) && define( 'WPCSC_VERSION', '2.3.1' );
 ! defined( 'WPCSC_LITE' ) && define( 'WPCSC_LITE', __FILE__ );
 ! defined( 'WPCSC_FILE' ) && define( 'WPCSC_FILE', __FILE__ );
 ! defined( 'WPCSC_URI' ) && define( 'WPCSC_URI', plugin_dir_url( __FILE__ ) );
@@ -28,12 +28,14 @@ defined( 'ABSPATH' ) || exit;
 ! defined( 'WPCSC_REVIEWS' ) && define( 'WPCSC_REVIEWS', 'https://wordpress.org/support/plugin/wpc-product-size-chart/reviews/' );
 ! defined( 'WPCSC_CHANGELOG' ) && define( 'WPCSC_CHANGELOG', 'https://wordpress.org/plugins/wpc-product-size-chart/#developers' );
 ! defined( 'WPCSC_DISCUSSION' ) && define( 'WPCSC_DISCUSSION', 'https://wordpress.org/support/plugin/wpc-product-size-chart' );
-! defined( 'WPC_URI' ) && define( 'WPC_URI', WPCSC_URI );
 
-include 'includes/log/wpc-log.php';
-include 'includes/dashboard/wpc-dashboard.php';
-include 'includes/kit/wpc-kit.php';
-include 'includes/hpos.php';
+// WPC Core
+require_once __DIR__ . '/includes/wpc-core/wpc-core.php';
+wpc_core_register( [
+	'file'    => __FILE__,
+	'version' => WPCSC_VERSION,
+	'prefix'  => 'wpcsc',
+] );
 
 if ( ! function_exists( 'wpcsc_init' ) ) {
     add_action( 'plugins_loaded', 'wpcsc_init', 11 );
@@ -202,6 +204,7 @@ if ( ! function_exists( 'wpcsc_init' ) ) {
                     $under_text     = get_post_meta( $post_id, 'under_text', true );
                     $table_data     = get_post_meta( $post_id, 'table_data', true ) ?: '[["&nbsp;"]]';
                     $table_data_arr = json_decode( $table_data );
+                    wp_nonce_field( 'wpcsc_meta_box_saving', 'wpcsc_meta_box_nonce' );
                     ?>
                     <div class="wpcsc_configuration_table">
                         <div class="wpcsc_configuration_tr">
@@ -216,7 +219,7 @@ if ( ! function_exists( 'wpcsc_init' ) ) {
                                             <option value="all" <?php selected( $type, 'all' ); ?>><?php esc_html_e( 'All products', 'wpc-product-size-chart' ); ?></option>
                                             <option value="combined" <?php selected( $type, 'combined' ); ?>><?php esc_html_e( 'Combined (Premium)', 'wpc-product-size-chart' ); ?></option>
                                             <?php
-                                            $taxonomies = get_object_taxonomies( 'product', 'objects' ); //$taxonomies = get_taxonomies( [ 'object_type' => [ 'product' ] ], 'objects' );
+                                            $taxonomies = get_object_taxonomies( 'product', 'objects' ); 
 
                                             foreach ( $taxonomies as $taxonomy ) {
                                                 echo '<option value="' . esc_attr( $taxonomy->name ) . '" ' . selected( $type, $taxonomy->name, false ) . '>' . esc_html( $taxonomy->label ) . '</option>';
@@ -357,9 +360,7 @@ if ( ! function_exists( 'wpcsc_init' ) ) {
                 }
 
                 function ajax_add_combined() {
-                    if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_key( $_POST['nonce'] ), 'wpcsc-security' ) ) {
-                        die( 'Permissions check failed!' );
-                    }
+                    check_ajax_referer( 'wpcsc-security', 'nonce' );
 
                     self::combined();
                     wp_die();
@@ -457,29 +458,39 @@ if ( ! function_exists( 'wpcsc_init' ) ) {
                 }
 
                 function save_size_chart( $post_id ) {
+                    if ( ! isset( $_POST['wpcsc_meta_box_nonce'] ) || ! wp_verify_nonce( sanitize_key( wp_unslash( $_POST['wpcsc_meta_box_nonce'] ) ), 'wpcsc_meta_box_saving' ) ) {
+                        return;
+                    }
+
                     if ( isset( $_POST['wpcsc_type'] ) ) {
-                        update_post_meta( $post_id, 'type', sanitize_text_field( $_POST['wpcsc_type'] ) );
+                        update_post_meta( $post_id, 'type', sanitize_text_field( wp_unslash( $_POST['wpcsc_type'] ) ) );
                     }
 
                     if ( isset( $_POST['wpcsc_terms'] ) ) {
-                        update_post_meta( $post_id, 'terms', sanitize_text_field( $_POST['wpcsc_terms'] ) );
+                        update_post_meta( $post_id, 'terms', sanitize_text_field( wp_unslash( $_POST['wpcsc_terms'] ) ) );
                     }
 
                     if ( isset( $_POST['wpcsc_combined'] ) ) {
-                        update_post_meta( $post_id, 'combined', self::sanitize_array( $_POST['wpcsc_combined'] ) );
+                        // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+                        update_post_meta( $post_id, 'combined', self::sanitize_array( wp_unslash( $_POST['wpcsc_combined'] ) ) );
                     }
 
                     if ( isset( $_POST['wpcsc_above_text'] ) ) {
-                        update_post_meta( $post_id, 'above_text', sanitize_post( $_POST['wpcsc_above_text'] ) );
+                        update_post_meta( $post_id, 'above_text', wp_kses_post( wp_unslash( $_POST['wpcsc_above_text'] ) ) );
                     }
 
                     if ( isset( $_POST['wpcsc_table_data'] ) ) {
-                        update_post_meta( $post_id, 'table_data', sanitize_text_field( $_POST['wpcsc_table_data'] ) );
+                        update_post_meta( $post_id, 'table_data', sanitize_text_field( wp_unslash( $_POST['wpcsc_table_data'] ) ) );
                     }
 
                     if ( isset( $_POST['wpcsc_under_text'] ) ) {
-                        update_post_meta( $post_id, 'under_text', sanitize_post( $_POST['wpcsc_under_text'] ) );
+                        update_post_meta( $post_id, 'under_text', wp_kses_post( wp_unslash( $_POST['wpcsc_under_text'] ) ) );
                     }
+
+                    delete_transient( 'wpcsc_chart_' . $post_id );
+
+                    global $wpdb;
+                    $wpdb->query( "DELETE FROM {$wpdb->options} WHERE option_name LIKE '_transient_wpcsc_charts_%' OR option_name LIKE '_transient_timeout_wpcsc_charts_%'" );
                 }
 
                 function custom_column( $columns ) {
@@ -488,13 +499,13 @@ if ( ! function_exists( 'wpcsc_init' ) ) {
                             'title'       => esc_html__( 'Title', 'wpc-product-size-chart' ),
                             'description' => esc_html__( 'Description', 'wpc-product-size-chart' ),
                             'shortcode'   => esc_html__( 'Shortcode', 'wpc-product-size-chart' ),
-                            'date'        => esc_html__( 'Date', 'wpc-product-size-chart' )
+                                            'date'        => esc_html__( 'Date', 'wpc-product-size-chart' )
                     ];
                 }
 
                 function custom_column_value( $column, $post_id ) {
                     if ( $column == 'description' ) {
-                        echo get_the_excerpt( $post_id );
+                        echo esc_html( get_the_excerpt( $post_id ) );
                     }
 
                     if ( $column == 'shortcode' ) {
@@ -606,7 +617,8 @@ if ( ! function_exists( 'wpcsc_init' ) ) {
                 }
 
                 function admin_menu_content() {
-                    $active_tab = sanitize_key( $_GET['tab'] ?? 'settings' );
+                    // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+                    $active_tab = sanitize_key( wp_unslash( $_GET['tab'] ?? 'settings' ) );
                     ?>
                     <div class="wpclever_settings_page wrap">
                         <div class="wpclever_settings_page_header">
@@ -631,7 +643,9 @@ if ( ! function_exists( 'wpcsc_init' ) ) {
                             </div>
                         </div>
                         <h2></h2>
-                        <?php if ( isset( $_GET['settings-updated'] ) && $_GET['settings-updated'] ) { ?>
+                        <?php
+                        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+                        if ( isset( $_GET['settings-updated'] ) && sanitize_key( wp_unslash( $_GET['settings-updated'] ) ) ) { ?>
                             <div class="notice notice-success is-dismissible">
                                 <p><?php esc_html_e( 'Settings updated.', 'wpc-product-size-chart' ); ?></p>
                             </div>
@@ -821,11 +835,12 @@ if ( ! function_exists( 'wpcsc_init' ) ) {
                 }
 
                 function ajax_search_size_chart() {
+                    check_ajax_referer( 'wpcsc-security', 'nonce' );
                     $return = [];
 
                     $search_results = new WP_Query( [
                             'post_type'           => 'wpc_size_chart',
-                            's'                   => sanitize_text_field( $_GET['q'] ),
+                            's'                   => sanitize_text_field( wp_unslash( $_GET['q'] ?? '' ) ),
                             'post_status'         => 'publish',
                             'ignore_sticky_posts' => 1,
                             'posts_per_page'      => 50
@@ -843,15 +858,16 @@ if ( ! function_exists( 'wpcsc_init' ) ) {
                 }
 
                 function ajax_search_term() {
+                    check_ajax_referer( 'wpcsc-security', 'nonce' );
                     $return = [];
 
                     $args = [
-                            'taxonomy'   => sanitize_text_field( $_REQUEST['taxonomy'] ),
+                            'taxonomy'   => sanitize_text_field( wp_unslash( $_REQUEST['taxonomy'] ?? '' ) ),
                             'orderby'    => 'id',
                             'order'      => 'ASC',
                             'hide_empty' => false,
                             'fields'     => 'all',
-                            'name__like' => sanitize_text_field( $_REQUEST['q'] ),
+                            'name__like' => sanitize_text_field( wp_unslash( $_REQUEST['q'] ?? '' ) ),
                     ];
 
                     $terms = get_terms( $args );
@@ -866,25 +882,19 @@ if ( ! function_exists( 'wpcsc_init' ) ) {
                 }
 
                 function ajax_get_chart() {
-                    if ( ! apply_filters( 'wpcsc_disable_nonce_check', false, 'get_chart' ) ) {
-                        if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_key( $_POST['nonce'] ), 'wpcsc-security' ) ) {
-                            die( 'Permissions check failed!' );
-                        }
-                    }
+                    check_ajax_referer( 'wpcsc-security', 'nonce' );
 
-                    echo self::size_chart( sanitize_text_field( $_POST['id'] ) );
+                    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                    echo self::size_chart( sanitize_text_field( wp_unslash( $_POST['id'] ?? 0 ) ) );
 
                     wp_die();
                 }
 
                 function ajax_get_charts() {
-                    if ( ! apply_filters( 'wpcsc_disable_nonce_check', false, 'get_charts' ) ) {
-                        if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_key( $_POST['nonce'] ), 'wpcsc-security' ) ) {
-                            die( 'Permissions check failed!' );
-                        }
-                    }
+                    check_ajax_referer( 'wpcsc-security', 'nonce' );
 
-                    echo self::size_charts( sanitize_text_field( $_POST['id'] ) );
+                    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                    echo self::size_charts( sanitize_text_field( wp_unslash( $_POST['id'] ?? 0 ) ) );
 
                     wp_die();
                 }
@@ -961,7 +971,8 @@ if ( ! function_exists( 'wpcsc_init' ) ) {
                         $product_id = $product->get_id();
 
                         if ( $product_id ) {
-                            echo apply_filters( 'wpcsc_tab_content_title', '<h2>' . esc_html( $tab['title'] ) . '</h2>' );
+                            echo wp_kses_post( apply_filters( 'wpcsc_tab_content_title', '<h2>' . esc_html( $tab['title'] ) . '</h2>' ) );
+                            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                             echo self::size_charts( $product_id );
                         }
                     }
@@ -1054,6 +1065,7 @@ if ( ! function_exists( 'wpcsc_init' ) ) {
                                 $list .= '</div><!-- /wpcsc-size-charts-list -->';
                             }
 
+                            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                             echo apply_filters( 'wpcsc_size_charts_list', $list, $product_id, $charts );
                         }
                     }
@@ -1230,19 +1242,24 @@ if ( ! function_exists( 'wpcsc_init' ) ) {
                             <input type="hidden" name="wpcsc_size_charts" class="wpcsc-size-charts-val"
                                    value="<?php echo esc_attr( $saved_size_charts ); ?>"/>
                         </div>
+                        <?php wp_nonce_field( 'wpcsc_product_meta_saving', 'wpcsc_product_meta_nonce' ); ?>
                     </div>
                     <?php
                 }
 
                 function process_product_meta( $post_id ) {
+                    if ( ! isset( $_POST['wpcsc_product_meta_nonce'] ) || ! wp_verify_nonce( sanitize_key( wp_unslash( $_POST['wpcsc_product_meta_nonce'] ) ), 'wpcsc_product_meta_saving' ) ) {
+                        return;
+                    }
+
                     if ( isset( $_POST['wpcsc_active'] ) ) {
-                        update_post_meta( $post_id, 'wpcsc_active', sanitize_text_field( $_POST['wpcsc_active'] ) );
+                        update_post_meta( $post_id, 'wpcsc_active', sanitize_text_field( wp_unslash( $_POST['wpcsc_active'] ) ) );
                     } else {
                         delete_post_meta( $post_id, 'wpcsc_active' );
                     }
 
                     if ( isset( $_POST['wpcsc_size_charts'] ) ) {
-                        update_post_meta( $post_id, 'wpcsc_size_charts', sanitize_text_field( $_POST['wpcsc_size_charts'] ) );
+                        update_post_meta( $post_id, 'wpcsc_size_charts', sanitize_text_field( wp_unslash( $_POST['wpcsc_size_charts'] ) ) );
                     } else {
                         delete_post_meta( $post_id, 'wpcsc_size_charts' );
                     }

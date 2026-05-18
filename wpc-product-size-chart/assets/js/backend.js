@@ -231,6 +231,7 @@
           return {
             q: params.term, // search query
             action: 'wpcsc_search_size_chart', // AJAX action for admin-ajax.php
+            nonce: wpcsc_vars.nonce,
           };
         }, processResults: function(data) {
           var options = [];
@@ -258,7 +259,7 @@
       ajax: {
         url: ajaxurl, dataType: 'json', delay: 250, data: function(params) {
           return {
-            q: params.term, action: 'wpcsc_search_term', taxonomy: type,
+            q: params.term, action: 'wpcsc_search_term', taxonomy: type, nonce: wpcsc_vars.nonce,
           };
         }, processResults: function(data) {
           var options = [];
@@ -293,7 +294,7 @@
         ajax: {
           url: ajaxurl, dataType: 'json', delay: 250, data: function(params) {
             return {
-              q: params.term, action: 'wpcsc_search_term', taxonomy: taxonomy,
+              q: params.term, action: 'wpcsc_search_term', taxonomy: taxonomy, nonce: wpcsc_vars.nonce,
             };
           }, processResults: function(data) {
             var options = [];
