@@ -3,23 +3,23 @@
 Plugin Name: WPC Product Size Chart for WooCommerce
 Plugin URI: https://wpclever.net/
 Description: Ultimate solution to manage WooCommerce product size charts.
-Version: 2.3.1
+Version: 2.3.2
 Author: WPClever
 Author URI: https://wpclever.net
 Text Domain: wpc-product-size-chart
 Domain Path: /languages/
 Requires Plugins: woocommerce
-Requires at least: 4.0
-Tested up to: 6.9
+Requires at least: 5.9
+Tested up to: 7.0
 WC requires at least: 3.0
-WC tested up to: 10.7
+WC tested up to: 10.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
 
 defined( 'ABSPATH' ) || exit;
 
-! defined( 'WPCSC_VERSION' ) && define( 'WPCSC_VERSION', '2.3.1' );
+! defined( 'WPCSC_VERSION' ) && define( 'WPCSC_VERSION', '2.3.2' );
 ! defined( 'WPCSC_LITE' ) && define( 'WPCSC_LITE', __FILE__ );
 ! defined( 'WPCSC_FILE' ) && define( 'WPCSC_FILE', __FILE__ );
 ! defined( 'WPCSC_URI' ) && define( 'WPCSC_URI', plugin_dir_url( __FILE__ ) );
@@ -32,9 +32,9 @@ defined( 'ABSPATH' ) || exit;
 // WPC Core
 require_once __DIR__ . '/includes/wpc-core/wpc-core.php';
 wpc_core_register( [
-	'file'    => __FILE__,
-	'version' => WPCSC_VERSION,
-	'prefix'  => 'wpcsc',
+        'file'    => __FILE__,
+        'version' => WPCSC_VERSION,
+        'prefix'  => 'wpcsc',
 ] );
 
 if ( ! function_exists( 'wpcsc_init' ) ) {
@@ -143,8 +143,6 @@ if ( ! function_exists( 'wpcsc_init' ) ) {
                 }
 
                 function init() {
-                    // load text-domain
-                    load_plugin_textdomain( 'wpc-product-size-chart', false, basename( WPCSC_DIR ) . '/languages/' );
 
                     $labels = [
                             'name'          => _x( 'Size Charts', 'Post Type General Name', 'wpc-product-size-chart' ),
@@ -219,7 +217,7 @@ if ( ! function_exists( 'wpcsc_init' ) ) {
                                             <option value="all" <?php selected( $type, 'all' ); ?>><?php esc_html_e( 'All products', 'wpc-product-size-chart' ); ?></option>
                                             <option value="combined" <?php selected( $type, 'combined' ); ?>><?php esc_html_e( 'Combined (Premium)', 'wpc-product-size-chart' ); ?></option>
                                             <?php
-                                            $taxonomies = get_object_taxonomies( 'product', 'objects' ); 
+                                            $taxonomies = get_object_taxonomies( 'product', 'objects' );
 
                                             foreach ( $taxonomies as $taxonomy ) {
                                                 echo '<option value="' . esc_attr( $taxonomy->name ) . '" ' . selected( $type, $taxonomy->name, false ) . '>' . esc_html( $taxonomy->label ) . '</option>';
@@ -499,7 +497,7 @@ if ( ! function_exists( 'wpcsc_init' ) ) {
                             'title'       => esc_html__( 'Title', 'wpc-product-size-chart' ),
                             'description' => esc_html__( 'Description', 'wpc-product-size-chart' ),
                             'shortcode'   => esc_html__( 'Shortcode', 'wpc-product-size-chart' ),
-                                            'date'        => esc_html__( 'Date', 'wpc-product-size-chart' )
+                            'date'        => esc_html__( 'Date', 'wpc-product-size-chart' )
                     ];
                 }
 
@@ -524,11 +522,11 @@ if ( ! function_exists( 'wpcsc_init' ) ) {
                     // library
                     if ( self::get_setting( 'library', 'magnific' ) === 'magnific' ) {
                         // magnific
-                        wp_enqueue_style( 'magnific-popup', WPCSC_URI . 'assets/libs/magnific-popup/magnific-popup.css' );
+                        wp_enqueue_style( 'magnific-popup', WPCSC_URI . 'assets/libs/magnific-popup/magnific-popup.css', [], WPCSC_VERSION );
                         wp_enqueue_script( 'magnific-popup', WPCSC_URI . 'assets/libs/magnific-popup/jquery.magnific-popup.min.js', [ 'jquery' ], WPCSC_VERSION, true );
                     } else {
                         // featherlight
-                        wp_enqueue_style( 'featherlight', WPCSC_URI . 'assets/libs/featherlight/featherlight.min.css' );
+                        wp_enqueue_style( 'featherlight', WPCSC_URI . 'assets/libs/featherlight/featherlight.min.css', [], WPCSC_VERSION );
                         wp_enqueue_script( 'featherlight', WPCSC_URI . 'assets/libs/featherlight/featherlight.min.js', [ 'jquery' ], WPCSC_VERSION, true );
                     }
 
@@ -597,7 +595,10 @@ if ( ! function_exists( 'wpcsc_init' ) ) {
 
                 function register_settings() {
                     // settings
-                    register_setting( 'wpcsc_settings', 'wpcsc_settings' );
+                    register_setting( 'wpcsc_settings', 'wpcsc_settings', [
+                            'type'              => 'array',
+                            'sanitize_callback' => [ $this, 'sanitize_array' ],
+                    ] );
                 }
 
                 function last_saved( $value, $option ) {
