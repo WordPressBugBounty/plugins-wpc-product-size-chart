@@ -3,7 +3,7 @@
 Plugin Name: WPC Product Size Chart for WooCommerce
 Plugin URI: https://wpclever.net/
 Description: Ultimate solution to manage WooCommerce product size charts.
-Version: 2.3.2
+Version: 2.3.3
 Author: WPClever
 Author URI: https://wpclever.net
 Text Domain: wpc-product-size-chart
@@ -12,14 +12,14 @@ Requires Plugins: woocommerce
 Requires at least: 5.9
 Tested up to: 7.0
 WC requires at least: 3.0
-WC tested up to: 10.8
+WC tested up to: 10.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
 
 defined( 'ABSPATH' ) || exit;
 
-! defined( 'WPCSC_VERSION' ) && define( 'WPCSC_VERSION', '2.3.2' );
+! defined( 'WPCSC_VERSION' ) && define( 'WPCSC_VERSION', '2.3.3' );
 ! defined( 'WPCSC_LITE' ) && define( 'WPCSC_LITE', __FILE__ );
 ! defined( 'WPCSC_FILE' ) && define( 'WPCSC_FILE', __FILE__ );
 ! defined( 'WPCSC_URI' ) && define( 'WPCSC_URI', plugin_dir_url( __FILE__ ) );
@@ -461,28 +461,28 @@ if ( ! function_exists( 'wpcsc_init' ) ) {
                     }
 
                     if ( isset( $_POST['wpcsc_type'] ) ) {
-                        update_post_meta( $post_id, 'type', sanitize_text_field( wp_unslash( $_POST['wpcsc_type'] ) ) );
+                        update_post_meta( $post_id, 'type', sanitize_text_field( wp_unslash( $_POST['wpcsc_type'] ?? '' ) ) );
                     }
 
                     if ( isset( $_POST['wpcsc_terms'] ) ) {
-                        update_post_meta( $post_id, 'terms', sanitize_text_field( wp_unslash( $_POST['wpcsc_terms'] ) ) );
+                        update_post_meta( $post_id, 'terms', sanitize_text_field( wp_unslash( $_POST['wpcsc_terms'] ?? '' ) ) );
                     }
 
                     if ( isset( $_POST['wpcsc_combined'] ) ) {
                         // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-                        update_post_meta( $post_id, 'combined', self::sanitize_array( wp_unslash( $_POST['wpcsc_combined'] ) ) );
+                        update_post_meta( $post_id, 'combined', self::sanitize_array( wp_unslash( $_POST['wpcsc_combined'] ?? '' ) ) );
                     }
 
                     if ( isset( $_POST['wpcsc_above_text'] ) ) {
-                        update_post_meta( $post_id, 'above_text', wp_kses_post( wp_unslash( $_POST['wpcsc_above_text'] ) ) );
+                        update_post_meta( $post_id, 'above_text', wp_kses_post( wp_unslash( $_POST['wpcsc_above_text'] ?? '' ) ) );
                     }
 
                     if ( isset( $_POST['wpcsc_table_data'] ) ) {
-                        update_post_meta( $post_id, 'table_data', sanitize_text_field( wp_unslash( $_POST['wpcsc_table_data'] ) ) );
+                        update_post_meta( $post_id, 'table_data', sanitize_text_field( wp_unslash( $_POST['wpcsc_table_data'] ?? '' ) ) );
                     }
 
                     if ( isset( $_POST['wpcsc_under_text'] ) ) {
-                        update_post_meta( $post_id, 'under_text', wp_kses_post( wp_unslash( $_POST['wpcsc_under_text'] ) ) );
+                        update_post_meta( $post_id, 'under_text', wp_kses_post( wp_unslash( $_POST['wpcsc_under_text'] ?? '' ) ) );
                     }
 
                     delete_transient( 'wpcsc_chart_' . $post_id );
@@ -1092,7 +1092,7 @@ if ( ! function_exists( 'wpcsc_init' ) ) {
                         }
 
                         $size_chart = '<div class="wpcsc-size-chart wpcsc-size-chart-' . esc_attr( $chart_id ) . '">';
-                        $size_chart .= '<div class="wpcsc-size-chart-title">' . apply_filters( 'wpcsc_size_chart_title', get_the_title( $chart_id ), $chart_id ) . '</div>';
+                        $size_chart .= '<div class="wpcsc-size-chart-title">' . apply_filters( 'wpcsc_size_chart_title', esc_html( get_the_title( $chart_id ) ), $chart_id ) . '</div>';
                         $size_chart .= '<div class="wpcsc-size-chart-content">';
 
                         if ( ! empty( $above_text ) ) {
@@ -1254,13 +1254,13 @@ if ( ! function_exists( 'wpcsc_init' ) ) {
                     }
 
                     if ( isset( $_POST['wpcsc_active'] ) ) {
-                        update_post_meta( $post_id, 'wpcsc_active', sanitize_text_field( wp_unslash( $_POST['wpcsc_active'] ) ) );
+                        update_post_meta( $post_id, 'wpcsc_active', sanitize_text_field( wp_unslash( $_POST['wpcsc_active'] ?? '' ) ) );
                     } else {
                         delete_post_meta( $post_id, 'wpcsc_active' );
                     }
 
                     if ( isset( $_POST['wpcsc_size_charts'] ) ) {
-                        update_post_meta( $post_id, 'wpcsc_size_charts', sanitize_text_field( wp_unslash( $_POST['wpcsc_size_charts'] ) ) );
+                        update_post_meta( $post_id, 'wpcsc_size_charts', sanitize_text_field( wp_unslash( $_POST['wpcsc_size_charts'] ?? '' ) ) );
                     } else {
                         delete_post_meta( $post_id, 'wpcsc_size_charts' );
                     }
