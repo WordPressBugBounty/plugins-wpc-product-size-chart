@@ -3,28 +3,27 @@
 Plugin Name: WPC Product Size Chart for WooCommerce
 Plugin URI: https://wpclever.net/
 Description: Ultimate solution to manage WooCommerce product size charts.
-Version: 2.3.3
 Author: WPClever
 Author URI: https://wpclever.net
 Text Domain: wpc-product-size-chart
 Domain Path: /languages/
 Requires Plugins: woocommerce
+Version: 2.3.4
 Requires at least: 5.9
-Tested up to: 7.0
 WC requires at least: 3.0
-WC tested up to: 10.9
+WC tested up to: 11.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
 
 defined( 'ABSPATH' ) || exit;
 
-! defined( 'WPCSC_VERSION' ) && define( 'WPCSC_VERSION', '2.3.3' );
+! defined( 'WPCSC_VERSION' ) && define( 'WPCSC_VERSION', '2.3.4' );
 ! defined( 'WPCSC_LITE' ) && define( 'WPCSC_LITE', __FILE__ );
 ! defined( 'WPCSC_FILE' ) && define( 'WPCSC_FILE', __FILE__ );
 ! defined( 'WPCSC_URI' ) && define( 'WPCSC_URI', plugin_dir_url( __FILE__ ) );
 ! defined( 'WPCSC_DIR' ) && define( 'WPCSC_DIR', plugin_dir_path( __FILE__ ) );
-! defined( 'WPCSC_SUPPORT' ) && define( 'WPCSC_SUPPORT', 'https://wpclever.net/support?utm_source=support&utm_medium=wpcsc&utm_campaign=wporg' );
+! defined( 'WPCSC_SUPPORT' ) && define( 'WPCSC_SUPPORT', 'https://wpclever.net/support/?utm_source=support&utm_medium=wpcsc&utm_campaign=wporg' );
 ! defined( 'WPCSC_REVIEWS' ) && define( 'WPCSC_REVIEWS', 'https://wordpress.org/support/plugin/wpc-product-size-chart/reviews/' );
 ! defined( 'WPCSC_CHANGELOG' ) && define( 'WPCSC_CHANGELOG', 'https://wordpress.org/plugins/wpc-product-size-chart/#developers' );
 ! defined( 'WPCSC_DISCUSSION' ) && define( 'WPCSC_DISCUSSION', 'https://wordpress.org/support/plugin/wpc-product-size-chart' );
