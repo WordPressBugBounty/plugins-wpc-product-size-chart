@@ -3,7 +3,7 @@ Contributors: wpclever
 Donate link: https://wpclever.net
 Tags: woocommerce, wpc, size chart, size guide
 Tested up to: 7.1
-Stable tag: 2.3.4
+Stable tag: 2.3.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -94,6 +94,9 @@ Please try other plugins from us:
 5. When adding/editing the product you can choose the Size Charts tab then add some size charts as you want
 
 == Changelog ==
+
+= 2.3.5 =
+* Fixed: Minor CSS/JS issues in the backend
 
 = 2.3.4 =
 * Fixed: Minor CSS/JS issues in the backend

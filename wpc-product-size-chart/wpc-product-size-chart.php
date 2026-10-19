@@ -8,17 +8,17 @@ Author URI: https://wpclever.net
 Text Domain: wpc-product-size-chart
 Domain Path: /languages/
 Requires Plugins: woocommerce
-Version: 2.3.4
+Version: 2.3.5
 Requires at least: 5.9
 WC requires at least: 3.0
-WC tested up to: 11.1
+WC tested up to: 11.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
 
 defined( 'ABSPATH' ) || exit;
 
-! defined( 'WPCSC_VERSION' ) && define( 'WPCSC_VERSION', '2.3.4' );
+! defined( 'WPCSC_VERSION' ) && define( 'WPCSC_VERSION', '2.3.5' );
 ! defined( 'WPCSC_LITE' ) && define( 'WPCSC_LITE', __FILE__ );
 ! defined( 'WPCSC_FILE' ) && define( 'WPCSC_FILE', __FILE__ );
 ! defined( 'WPCSC_URI' ) && define( 'WPCSC_URI', plugin_dir_url( __FILE__ ) );
